@@ -662,6 +662,9 @@ h1 {
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 15vh;
+    max-width: 1300px;
+    /* Reduced constraint to allow wider separation */
+    width: 95%;
 }
 
 .stack-categories {
@@ -669,7 +672,20 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
-    margin-top: 40px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    /* Ensure it takes full width so titles stack properly */
+}
+
+.stack-subsection-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 40px 0 20px;
+    color: var(--text-muted);
+    letter-spacing: -0.02em;
 }
 
 .stack-category {
@@ -695,6 +711,79 @@ h1 {
 @media (max-width: 850px) {
     .stack-category:not(:last-child)::after {
         display: none;
+    }
+}
+
+.stack-column-main .stack-category:nth-child(2)::after {
+    display: none;
+}
+
+.stack-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    /*Changed from flex-start to make columns equal height*/
+    gap: 200px;
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.stack-column-support {
+    position: relative;
+}
+
+/* Main separator line */
+.stack-column-support::before {
+    content: '';
+    position: absolute;
+    left: -100px;
+    /* Positioned in the gap, closer to support stack */
+    top: 50px;
+    /* Start a bit lower than top */
+    bottom: 0;
+    /* Extend to bottom */
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stack-column-main .stack-categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    width: 100%;
+    margin-top: 0;
+    /* Remove top margin if present to tighten things */
+}
+
+/* Ensure Infraestructura spans full width */
+.stack-column-main .stack-category:last-child {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stack-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stack-column-main {
+    flex: 3;
+    /* Give more space to main stack to fit 3 items */
+}
+
+.stack-column-support {
+    flex: 1;
+    /* Support stack needs less space */
+}
+
+@media (max-width: 900px) {
+    .stack-main-container {
+        flex-direction: column;
+        gap: 40px;
     }
 }
 
